@@ -14,6 +14,10 @@ import {
   View,
   Text,
   StatusBar,
+  TextInput,
+  Button,
+  FlatList,
+  Image,
 } from 'react-native';
 
 import {
@@ -23,20 +27,51 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import {colors} from "./src/style/color";
+import img_iphone from './src/img/iphone.jpg';
+import img_mi from './src/img/mi.jpeg';
+import GroceryItem from "./src/components/GroceryItem";
 
 const App: () => React$Node = () => {
+  const shoppingItems = [
+    {
+      img: img_iphone,
+      name: 'iphone',
+      quantity: 2,
+      price: 80000,
+    },
+    {
+      img: img_mi,
+      name: 'mi',
+      quantity: 5,
+      price: 90000,
+    },
+  ];
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={{backgroundColor:"#FF4"}}>
-       <Text style={{color:colors.red,fontSize:colors.size,textAlign:"center"}}>Rifat</Text>
+      <SafeAreaView style={{borderRadius: 10, backgroundColor: '#AED6CD'}}>
+        <View>
+          <FlatList
+            keyExtractor={(item, index) => index.toString()}
+            data={shoppingItems}
+            renderItem={data => (
+              <GroceryItem grocery={data.item}/>
+            )}
+          />
+        </View>
       </SafeAreaView>
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  input: {
+    padding: 5,
+    backgroundColor: '#1845B8',
+    margin: 5,
+    fontSize: 20,
+    color: 'white',
+  },
   scrollView: {
     backgroundColor: Colors.lighter,
   },
